@@ -8,10 +8,37 @@ Two time series $(X_t)$ and $(Y_t)$ are *jointly* stationary if they are both st
 $$\gamma_{XY}(h) = \text{Cov}(X_{t+h}, Y_t) = \mathbb{E}[(X_{t+h} - \mu_x)(Y_t - \mu_Y)],$$
 where $\mu_X$ and $\mu_Y$ are the constant means of $(X_t)$ and $(Y_t)$ respectively. Consequently, the cross-correlation function between $(X_t)$ and $(Y_t)$ is defined as
 $$\rho_{XY}(h) = \frac{\gamma_{XY}(h)}{\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}.$$
-Show that $\rho_{XY}(h) = \rho_{YX}(-h)$.
+Show that $\rho_{XY}(h) = \rho_{YX}(-h)$.  
 
 ---  
 
+$$
+\begin{split}
+\rho_{YX}(-h) & = \frac{\gamma_{YX}(-h)}{\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\\
+& = \frac{\text{Cov}(Y_{t-h}, X_t)}{\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\end{split}
+$$  
+
+Since $(X_t)$ and $(Y_t)$ are jointly stationary, the cross-covariance depends only on lag $h$. Then,  
+
+$$
+\text{Cov}(Y_{t-h}, X_t) = \text{Cov}(Y_{t}, X_{t+h}) = \text{Cov}(X_{t+h}, Y_{t})
+$$  
+
+Therefore,  
+
+$$
+\begin{split}
+\rho_{YX}(-h) & = \frac {\text{Cov}(Y_{t-h}, X_t)} {\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\\
+&= \frac {\text{Cov}(X_{t+h}, Y_{t})} {\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\\
+&= \rho_{XY}(h)
+\end{split}
+$$  
+
+Q.E.D.
 
 
 \pagebreak  
@@ -26,8 +53,49 @@ $$
 where $U_1$, $U_2$ are independent random variables with zero means and $E(U_1^2) = E(U_2^2) = \sigma^2$. The constant $\omega_0$ determines the period or time it takes the process to make one complete cycle. Show that this series is weakly stationary with autocovariance function
 $$
 \gamma(h) = \sigma^2 cos(2\pi \omega_0 h).
-$$
+$$  
 
+---  
+
+1.  
+
+$$
+\begin{split}
+\mathbb{E}[X_t] & = \mathbb{E}[U_1 sin(2\pi \omega_0 t)] + \mathbb{E}[U_2 cos(2\pi \omega_0 t)]
+\\
+& = \mathbb{E}[U_1]\mathbb{E}[sin(2\pi \omega_0 t)]+\text{Cov}(U_1, sin(2\pi \omega_0 t)) + \ldots
+\\
+& = 0
+\end{split}
+$$  
+
+2.  
+
+$$
+\begin{split}
+\text{Var}(X_t) & = \text{Var}(U_1 sin(2\pi \omega_0 t)) + \text{Var}(U_2 cos(2\pi \omega_0 t)) + 2\text{Cov}(U_1 sin(2\pi \omega_0 t), U_2 cos(2\pi \omega_0 t))
+\\
+& = \mathbb{E}[
+\end{split}
+$$  
+
+3.  
+
+$$
+\begin{split}
+\text{Cov}(X_t, X_{t+h}) &= \mathbb{E}[(X_t-\mathbb{E}[X_t])(X_{t+h}-\mathbb{E}[X_{t+h}])]
+\\
+& = \mathbb{E}[X_{t}X_{t+h}] 
+\\
+&= \mathbb{E}[ U_1^2sin_tsin_{t+h}+U_2^2cos_t cos_{t+h}+U_1 U_2cos_t sin_{t+h}+U_1 U_2sin_t cos_{t+h} ]
+\\
+&=
+\end{split}
+$$  
+
+The autocovariance$\gamma(h) = \sigma^2 cos(2\pi \omega_0 h)$ only depends on h, not on t.  
+
+Therefore, this time series $(X_t)$ is weakly stationary.
 
 \pagebreak  
 
@@ -42,8 +110,81 @@ where $W_t$ and $U_t$ are independent white noise series with variances $\sigma_
 1. Express the autocorrelation function of $(Y_t)$, $\rho_Y(h)$, for $h=0, \pm 1, \pm 2, \ldots$ as a function of $\sigma_w^2$, $\sigma_u^2$ and $\theta$.
 2. Using the information in Question 1:
     a) Determine the cross-correlation function, $\rho_{XY}(h)$ relating $(X_t)$ and $(Y_t)$.
-    b) Show that $(X_t)$ and $(Y_t)$ are jointly stationary.
+    b) Show that $(X_t)$ and $(Y_t)$ are jointly stationary.  
+    
+---  
 
+1. 
+$$
+\begin{split}
+Cov(Y_t, Y_{t+h}) & = \mathbb{E}[(Y_t - \mathbb{E}[Y_t])(Y_{t+h} - \mathbb{E}[Y_{t+h}])]
+\\
+& = \mathbb{E}[Y_t Y_{t+h}]
+\\
+& = \mathbb{E}[W_tW_{t+h}-\theta W_{t}W_{t+h-1}-\theta W_{t-1}W_{t+h}+\theta^2 W_{t-1}W_{t+h-1}+U_tU_{t+h}]
+\end{split}
+$$  
+
+When $h=0$, 
+$$
+Cov(Y_t, Y_{t+h}) = Var(Y_t) = \sigma_w^2 + \theta^2 \sigma_w^2 + \sigma_u^2
+$$  
+
+When $h=\pm 1$, 
+$$
+Cov(Y_t, Y_{t+h}) = -\theta \sigma_w^2
+$$  
+
+When $|h| \geq 2$, 
+$$
+Cov(Y_t, Y_{t+h}) = 0
+$$  
+
+Also,  
+$$
+\rho_Y(h) = 
+\begin{equation}  
+\left\{  
+             \begin{array}{**lr**}  
+             1, & h=0   \\
+             \frac{-\theta \sigma_w^2}{\sigma_w^2 + \theta^2 \sigma_w^2 + \sigma_u^2}, & h=\pm 1 \\
+             0, & h \geq 2\\
+             \end{array}  
+\right.
+\end{equation}
+$$  
+
+2.
+a. 
+$$
+\begin{split}
+\rho_{XY}(h) & = \frac{\gamma_{XY}(h)}{\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\\
+& = \frac {\mathbb{E}[(X_{t+h} - \mu_x)(Y_t - \mu_Y)]}{\sqrt{\gamma_{X}(0)}\sqrt{\gamma_{Y}(0)}}
+\\
+& = \frac {\mathbb{E}[W_{t+h}(W_t - \theta W_{t-1} + U_t)]}{\sigma_w \sqrt{\sigma_w^2 + \theta^2 \sigma_w^2 + \sigma_u^2}}
+\end{split}
+$$  
+
+When $h=0$, 
+$$
+\rho_{XY}(h) = \frac {1}{\sqrt{\sigma_w^2 + \theta^2 \sigma_w^2 + \sigma_u^2}}
+$$  
+
+When $h \geq 1$ or $h \leq -2$, 
+$$
+\rho_{XY}(h) = 0
+$$  
+
+When $h = -1$, 
+$$
+\rho_{XY}(h) =- \frac {\theta}{\sqrt{\sigma_w^2 + \theta^2 \sigma_w^2 + \sigma_u^2}}
+$$  
+
+
+b. 
+These two time series, $X_t$ and $Y_t$, are each stationary, and the cross-covariance function is only a function of the lag $h$.  
+Therefore, they are jointly stationary.
 
 
 \pagebreak  
@@ -57,8 +198,70 @@ such that $Y_t$ is a stationary process and $R_t$ denotes a random walk with dri
 $$
 R_t = \omega + R_{t-1} + W_t,
 $$
-where $\omega$ is a constant and $W_t$ is a white noise process with variance $\sigma_w^2$. Show that under a difference operation, $X_t$ is stationary (i.e. $Z_t = \delta X_t = X_t - X_{t-1}$ is stationary). 
+where $\omega$ is a constant and $W_t$ is a white noise process with variance $\sigma_w^2$. Show that under a difference operation, $X_t$ is stationary (i.e. $Z_t = \delta X_t = X_t - X_{t-1}$ is stationary).  
 
+---  
+
+$Z_t = X_t - X_{t-1}$ is stationary.  
+
+Proof:  
+
+Since $Y_t$ is a stationary process, we have bouonded expectation $\mathbb{E}_Y$, variance $\sigma_Y^2$, and autocovariance function $\gamma_Y (h)$ only depends on lag h.
+
+1. The expectation is bounded.  
+
+$$
+\begin{split}
+\mathbb{E}[Z_t] & = \mathbb{E}[X_t-X_{t-1}]
+\\
+&= \mathbb{E}[ R_{t-1}-R_{t-2}+Y_t-Y_{t-1}+W_t-W_{t-1} ]
+\\
+& = \mathbb{E}[\omega+W_{t-1}+Y_t-Y_{t-1}+W_t-W_{t-1} ]
+\\
+& = \omega
+\end{split}
+$$  
+
+2. The variance is bounded.  
+
+$$
+\begin{split}
+\text{Var}(Z_t) & = \mathbb{E}[(Z_t-\mathbb{E}[Z_t])^2]
+\\
+&= \mathbb{E}[2Y_t^2-2Y_tY_{t-1}+W_{t}^2]
+\\
+&= 2\sigma_Y^2-2\gamma_Y(1)+\sigma_w^2
+\end{split}
+$$  
+
+3.  
+
+$$
+\begin{split}
+\text{Cov}(Z_t, Z_{t+h}) &= \mathbb{E}[(Z_t-\mathbb{E}[Z_t])(Z_{t+h}-\mathbb{E}[Z_{t+h}])]
+\\
+& = \mathbb{E}[(Y_t-Y_{t-1}+W_t)(Y_{t+h}-Y_{t+h-1}+W_{t+h})] 
+\\
+&= \mathbb{E}[Y_tY_{t+h}-Y_tY_{t+h-1}-Y_{t-1}Y_{t+h}+Y_{t-1}Y_{t+h-1}+W_{t}W_{t+h}]
+\end{split}
+$$  
+
+Therefore,  
+
+$$
+\text{Cov}(Z_t, Z_{t+h}) = 
+\begin{equation}  
+\left\{  
+             \begin{array}{**lr**}  
+             2\sigma_Y^2-2\gamma_Y(1)+\sigma_w^2, & h=0   \\
+             2\gamma_Y(1)-\sigma_Y^2-\gamma_Y(2), & h=\pm 1 \\
+             2\gamma_Y(h)-\gamma_Y(h-1)-\gamma_Y(h+1), & |h| \geq 2\\
+             \end{array}  
+\right.
+\end{equation}
+$$  
+
+As a result, $Z_t$ is stationary.
 
 
 \pagebreak  
@@ -75,7 +278,68 @@ Y_t = a+bt+W_t,
 $$
 with $a$ and $b$ being constants and $W_t$ being a white noise process with variance $\sigma_w^2$, $t=0, \pm 1, \ldots, \pm T$. Find the mean function and autocorrelation function of the process $(X_t)$. 
 
-Hint: Even though the process is not stationary, the autocorrelation function of ${X_t}$ should only depend on h. 
+Hint: Even though the process is not stationary, the autocorrelation function of ${X_t}$ should only depend on h.  
+
+---  
+
+Firstly, the mean function:  
+
+$$
+\begin{split}
+\mathbb{E}[X_t] &= \mathbb{E}[\frac{1}{2q+1} \sum_{j=-q}^{q}(a+b(t+j)+W_{t+j})]
+\\
+& = a+bt+ \mathbb{E}[\frac{1}{2q+1}\sum_{j=-q}^{q}W_{t+j}] 
+\\
+&= a+bt
+\end{split}
+$$  
+
+The ACF:  
+
+$$
+\begin{split}
+\gamma(h) &= \mathbb{E}[(X_t-\mathbb{E}[X_t])(X_{t+h}-\mathbb{E}[X_{t+h}])]
+\\
+&= \mathbb{E}[(\frac{1}{2q+1} \sum_{j=-q}^{q} Y_{t+j} -a-bt)(\frac{1}{2q+1} \sum_{j=-q}^{q} Y_{t+h+j} -a-b(t+h))]
+\\
+& = \mathbb{E}[(\frac{1}{2q+1}\sum_{j=-q}^{q}W_{t+j})(\frac{1}{2q+1}\sum_{j=-q}^{q}W_{t+h+j})] 
+\end{split}
+$$  
+
+When $h=0$, 
+$$
+\gamma(h) = \gamma(0) = Var(X_t) = \frac{\sigma_w^2}{2q+1}
+$$  
+
+When $h=\pm 1$, 
+$$
+\gamma(h) = \gamma(1) = \frac{2q}{(2q+1)^2}\sigma_w^2
+$$  
+
+When $0 \lt |h| \leq 2q+1$, 
+$$
+\gamma(h) = \frac{2q+1-|h|}{(2q+1)^2}\sigma_w^2
+$$  
+
+When $|h| \gt 2q+1$, 
+$$
+\gamma(h) = 0
+$$  
+
+Therefore,we get the autocorrelation function:  
+
+$$
+\rho_{X_t}(h) = 
+\begin{equation}  
+\left\{  
+             \begin{array}{**lr**}  
+             1, & h=0   \\
+             \frac{2q+1-|h|}{2q+1}, & 0 \lt |h| \leq 2q+1 \\
+             0, & |h| \gt 2q+1\\
+             \end{array}  
+\right.
+\end{equation}
+$$  
 
 
 
@@ -84,11 +348,28 @@ Hint: Even though the process is not stationary, the autocorrelation function of
 
 # Question 6  
 An MA(1) model is defined as follows:
-$$X_t = W_t + \theta W_{t−1}.$$
+$$X_t = W_t + \theta W_{t-1}$$
 
 1. Show that $\big|\rho_X(1)\big| \leq \frac{1}{2}$ for any value of $\theta$. 
-2. For which values of $\theta$ does $\rho_X(1)$ attain its maximum and minimum?
+2. For which values of $\theta$ does $\rho_X(1)$ attain its maximum and minimum?  
 
+---  
+
+1.  
+
+For MA(1), we have $\big|\rho_X(1)\big| = \frac{|\theta|}{\theta^2+1} $,  
+
+When $|\theta| \geq 1$, we have $\big|\rho_X(1)\big| = \frac{|\theta|}{\theta^2+1}  \leq \frac{1}{\theta^2+1} \leq \frac{1}{2}$;  
+
+When $|\theta| \lt 1$, we have $\big|\rho_X(1)\big| = \frac{|\theta|}{\theta^2+1}  \lt \frac{\theta^2}{\theta^2+1} =\frac{1}{1+1/\theta^2} \lt \frac{1}{2}$;  
+
+As a result, $\big|\rho_X(1)\big| \leq \frac{1}{2}$ for any value of $\theta$.  
+
+2.  
+
+When $\theta = 1$, we get the Maximum $\rho_X(1) = \frac{\theta}{\theta^2+1}  = \frac{1}{2}$;  
+
+When $\theta = -1$, we get the Minimum $\rho_X(1) = \frac{\theta}{\theta^2+1}  = -\frac{1}{2}$;  
 
 
 \pagebreak  
@@ -121,3 +402,5 @@ for $h\geq 0$ (i.e. $X_t$ is "asymptotically stationary").
 4. Suppose $$X_1 = \frac{W_1}{\sqrt{1-\phi^2}}.$$ Is this process stationary?
 
 5. Comment on how you could use these results to simulate $T$ observations of a stationary AR(1) model using values simulated from an iid $\mathcal{N}(0,1)$.
+
+
