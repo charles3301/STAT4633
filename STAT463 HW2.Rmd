@@ -73,6 +73,16 @@ $$
 
 $$
 \begin{split}
+\text{Var} &=Var(U_{1}sin(2\pi\omega_{0}t)+U_2 cos(2\pi \omega_0 t))
+\\
+&= Var[U_1^2]+Var[U_2^2]
+\\
+&= 2\sigma^2
+\end{split}
+$$  
+
+$$
+\begin{split}
 \text{Var}(X_t) & = \text{Var}(U_1 sin(2\pi \omega_0 t)) + \text{Var}(U_2 cos(2\pi \omega_0 t)) + 2\text{Cov}(U_1 sin(2\pi \omega_0 t), U_2 cos(2\pi \omega_0 t))
 \\
 & = \mathbb{E}[
@@ -80,6 +90,32 @@ $$
 $$  
 
 3.  
+
+$$
+\begin{split}
+\text{Cov}(X_t,X_t+h) &=\mathbb{E}[(X_t-\mathbb{E}[X_t])(X_{t+h}-\mathbb{E}[X_{t+h}])]
+\\
+& =\mathbb{E}[X_{t}X_{t+h}]
+\\
+&= \mathbb{E}[(U_1sin(2\pi\omega_0t)+U_2cos(2\pi\omega_0t))(U_1sin(2\pi\omega_0t+2\pi\omega_0h)+U_2cos(2\pi\omega_0t+2\pi\omega_0h))]
+\\
+&= \mathbb{E}[(U_1sin(2\pi\omega_0t)+U_2cos(2\pi\omega_0t))(U_1sin(2\pi\omega_0t)cos(2\pi\omega_0h)+U_1cos(2\pi\omega_0t)sin(2\pi\omega_0h)
+\\
+& U_2cos(2\pi\omega_0t)cos(2\pi\omega_0h)-U_2sin(2\pi\omega_0t)sin(2\pi\omega_0h)]
+\\
+&= \mathbb{E}[U_1^2sin^2(2\pi\omega_0t)cos(2\pi\omega_0h)+U_1^2sin(2\pi\omega_0t)cos(2\pi\omega_0t)sin(2\pi\omega_0h)+U_1U_2sin(2\pi\omega_0t)cos(2\pi\omega_0t)cos(2\pi\omega_0h)
+\\
+& -U_1U_2sin^2(2\pi\omega_0t)sin(2\pi\omega_0h)+U_1U_2sin(2\pi\omega_0t)cos(2\pi\omega_0t)cos(2\pi\omega_0h)+U_1U_2cos^2(2\pi\omega_0t)sin(2\pi\omega_0h)
+\\
+& +U_2^2cos^2(2\pi\omega_0t)cos(2\pi\omega_0h)-U_2^2sin(2\pi\omega_0t)cos(2\pi\omega_0t)sin(2\pi\omega_0h)]
+\\
+&= \mathbb{E}[U_1^2sin^2(2\pi\omega_0t)cos(2\pi\omega_0h)+U_2^2cos^2(2\pi\omega_0t)cos(2\pi\omega_0h)]
+\\
+&= \mathbb{E}[U_1^2]cos(2\pi\omega_0h)
+\\
+&= \sigma^2cos(2\pi\omega_0h)
+\end{split}
+$$  
 
 $$
 \begin{split}
@@ -401,6 +437,13 @@ for $h\geq 0$ (i.e. $X_t$ is "asymptotically stationary").
 
 4. Suppose $$X_1 = \frac{W_1}{\sqrt{1-\phi^2}}.$$ Is this process stationary?
 
-5. Comment on how you could use these results to simulate $T$ observations of a stationary AR(1) model using values simulated from an iid $\mathcal{N}(0,1)$.
+5. Comment on how you could use these results to simulate $T$ observations of a stationary AR(1) model using values simulated from an iid $\mathcal{N}(0,1)$.  
+
+---  
+
+1.  
+$\overline{X_t}=\frac{1}{T} \sum_{t=1}^T X_t =  $  
+$\text{Var}(X_t)=$
+
 
 
